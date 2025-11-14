@@ -5,6 +5,10 @@ export const config = {
 };
 
 module.exports = async (req, res) => {
+  // 로컬 엔드포인트 로그
+  const localEndpoint = `${req.method} ${req.url}`;
+  console.log('📡 Local API Endpoint:', localEndpoint);
+  
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -23,6 +27,9 @@ module.exports = async (req, res) => {
     const iterationName = process.env.AZURE_ITERATION_NAME;
 
     const predictionUrl = `${endpoint}/customvision/v3.0/Prediction/${projectId}/classify/iterations/${iterationName}/image`;
+    
+    // Azure 엔드포인트 로그
+    console.log('🌐 Azure Prediction Endpoint:', predictionUrl);
 
     // Use global fetch (Node 18+)
     const azureResponse = await fetch(predictionUrl, {

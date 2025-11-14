@@ -204,8 +204,12 @@
                     showLoading('분석 중...');
 
                     // 서버로 전송
+                    const apiEndpoint = '/api/predict';
+                    console.log('📡 API Endpoint:', apiEndpoint);
+                    console.log('📡 Full URL:', window.location.origin + apiEndpoint);
+                    
                     try {
-                        const response = await fetch('/api/predict', {
+                        const response = await fetch(apiEndpoint, {
                             method: 'POST',
                             body: blob
                         });
